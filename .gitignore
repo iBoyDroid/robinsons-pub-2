@@ -1,0 +1,12 @@
+.DS_Store
+Thumbs.db
+.tmp_brand/
+node_modules/
+dist/
+*.log
+
+# Raw source videos are large — commit only the extracted frames/
+# If you need to track .mp4 files, use Git LFS: https://git-lfs.com
+*.mp4
+*.mov
+*.avi
