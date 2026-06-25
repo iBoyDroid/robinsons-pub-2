@@ -337,3 +337,138 @@ body > *, main, footer { position: relative; z-index: 1; }
   ::-webkit-scrollbar { display: none; }
   html { scrollbar-width: none; }
 }
+
+/* ===================== Chat widget (universal, drop-in) =====================
+   Per site, change ONLY the 11 brand colours below (brand). Everything else
+   (tints, borders, scrims) derives from them via color-mix. The component
+   (ChatWidget.tsx) and these class names are LOCKED, do not edit them. */
+:root {
+  --cw-brand: #1B5E38;          /* brand primary: launcher, user bubble, send (Irish pub green) */
+  --cw-brand-strong: #154A2C;   /* brand primary, darker (hover) */
+  --cw-accent: #C49A35;         /* brand accent: icon, links, chips, badge (gold) */
+  --cw-accent-strong: #A8812A;  /* brand accent, darker (hover) */
+  --cw-accent-ink: #0A0A0A;     /* text/icon shown ON the accent colour */
+  --cw-dark: #0A0A0A;           /* brand dark: chat header bar */
+  --cw-dark-soft: #141414;      /* brand dark, slightly lifted (avatar) */
+  --cw-surface: #FBF7EC;        /* brand light surface: panel + footer */
+  --cw-bubble: #F3ECDA;         /* brand light: bot bubbles + message area */
+  --cw-ink: #1A1A14;            /* brand body text */
+  --cw-on-dark: #F0E6C8;        /* brand light text shown on the dark header */
+}
+
+.cw-launcher {
+  background: var(--cw-brand);
+  color: var(--cw-on-dark);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cw-accent) 38%, transparent),
+    0 16px 40px -16px rgba(0, 0, 0, 0.5);
+}
+.cw-launcher:hover { background: var(--cw-brand-strong); }
+.cw-launcher-icon { background: var(--cw-accent); color: var(--cw-accent-ink); }
+
+.cw-teaser {
+  background: var(--cw-surface);
+  color: var(--cw-ink);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cw-brand) 12%, transparent),
+    0 18px 45px -18px rgba(0, 0, 0, 0.5);
+}
+.cw-strong { color: var(--cw-brand); font-weight: 600; }
+.cw-teaser-close { color: color-mix(in srgb, var(--cw-ink) 45%, transparent); }
+.cw-teaser-close:hover {
+  background: color-mix(in srgb, var(--cw-brand) 10%, transparent);
+  color: var(--cw-ink);
+}
+
+.cw-panel {
+  background: var(--cw-surface);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--cw-brand) 14%, transparent),
+    0 30px 80px -40px rgba(0, 0, 0, 0.7);
+}
+.cw-header { background: var(--cw-dark); }
+.cw-avatar {
+  background: var(--cw-dark-soft);
+  border: 1px solid color-mix(in srgb, var(--cw-accent) 45%, transparent);
+  color: var(--cw-accent);
+}
+.cw-title { color: var(--cw-on-dark); }
+.cw-subtitle { color: color-mix(in srgb, var(--cw-on-dark) 60%, transparent); }
+.cw-badge {
+  border: 1px solid color-mix(in srgb, var(--cw-accent) 40%, transparent);
+  background: color-mix(in srgb, var(--cw-accent) 12%, transparent);
+  color: var(--cw-accent);
+}
+.cw-phone-btn { background: var(--cw-accent); color: var(--cw-accent-ink); }
+.cw-phone-btn:hover { background: var(--cw-accent-strong); }
+.cw-close { color: color-mix(in srgb, var(--cw-on-dark) 65%, transparent); }
+.cw-close:hover {
+  background: color-mix(in srgb, var(--cw-on-dark) 12%, transparent);
+  color: var(--cw-on-dark);
+}
+
+.cw-messages { background: color-mix(in srgb, var(--cw-bubble) 45%, var(--cw-surface)); }
+.cw-bubble-bot {
+  background: var(--cw-bubble);
+  color: var(--cw-ink);
+  border: 1px solid color-mix(in srgb, var(--cw-brand) 10%, transparent);
+}
+.cw-bubble-user { background: var(--cw-brand); color: var(--cw-on-dark); }
+.cw-link {
+  color: var(--cw-brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--cw-accent) 60%, transparent);
+  text-underline-offset: 2px;
+}
+
+.cw-footer {
+  background: var(--cw-surface);
+  border-top: 1px solid color-mix(in srgb, var(--cw-brand) 10%, transparent);
+}
+.cw-chip {
+  background: color-mix(in srgb, var(--cw-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cw-accent) 38%, transparent);
+  color: var(--cw-ink);
+}
+.cw-chip:hover { background: color-mix(in srgb, var(--cw-accent) 20%, transparent); }
+.cw-input {
+  background: var(--cw-bubble);
+  color: var(--cw-ink);
+  border: 1px solid color-mix(in srgb, var(--cw-brand) 15%, transparent);
+}
+.cw-input::placeholder { color: color-mix(in srgb, var(--cw-ink) 42%, transparent); }
+.cw-input:focus {
+  outline: none;
+  border-color: var(--cw-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cw-accent) 28%, transparent);
+}
+.cw-send { background: var(--cw-brand); color: var(--cw-on-dark); }
+.cw-send:hover { background: var(--cw-brand-strong); }
+.cw-send:disabled { opacity: 0.4; }
+.cw-cta { background: var(--cw-accent); color: var(--cw-accent-ink); }
+.cw-cta:hover { background: var(--cw-accent-strong); }
+.cw-scrim { background: color-mix(in srgb, var(--cw-dark) 45%, transparent); }
+
+.cw-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--cw-brand) 55%, transparent);
+  animation: cw-bounce 1s infinite ease-in-out;
+}
+@keyframes cw-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes cw-teaser-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.cw-teaser-anim {
+  animation: cw-teaser-pop 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  transform-origin: bottom right;
+}
+
+/* fallback for the global press-feedback class (no-op if the site already defines .tap) */
+.tap { transition: transform 0.12s ease; }
+.tap:active { transform: scale(0.98); }
+

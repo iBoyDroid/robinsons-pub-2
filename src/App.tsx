@@ -13,6 +13,7 @@ import Hours from './components/Hours';
 import InstagramCTA from './components/InstagramCTA';
 import Footer from './components/Footer';
 import MobileNav from './components/MobileNav';
+import { ChatWidget } from './components/ChatWidget';
 
 export default function App() {
   useEffect(() => {
@@ -79,6 +80,7 @@ export default function App() {
 
       <Footer />
       <MobileNav />
+      <ChatWidget />
     </>
   );
 }
